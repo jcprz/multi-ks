@@ -1,0 +1,23 @@
+language: generic
+sudo: required
+services:
+    - docker
+
+before_install:
+    - docker build -t jc-prz/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+    - docker run -e CI=true jc-prz/react-test npm test
+
+after_success:
+    - docker build -t jc-prz/multi-client ./client 
+    - docker build -t jc-prz/multi-nginx ./nginx
+    - docker build -t jc-prz/multi-server ./server
+    - docker build -t jc-prz/multi-worker ./worker
+    #login to Docker Hub
+    - echo "$DOCKER_PASSWORD"| docker login -u "$DOCKER_ID" --password-stdin
+    #Take those images and push them in Docker Hub
+    - docker push jc-prz/multi-client 
+    - docker push jc-prz/multi-nginx
+    - docker push jc-prz/multi-server 
+    - docker push jc-prz/multi-worker
