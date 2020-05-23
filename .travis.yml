@@ -4,20 +4,20 @@ services:
     - docker
 
 before_install:
-    - docker build -t jc-prz/react-test -f ./client/Dockerfile.dev ./client
+    - docker build -t jcesarpabreu/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-    - docker run -e CI=true jc-prz/react-test npm test
+    - docker run -e CI=true jcesarpabreu/react-test npm test
 
 after_success:
-    - docker build -t jc-prz/multi-client ./client 
-    - docker build -t jc-prz/multi-nginx ./nginx
-    - docker build -t jc-prz/multi-server ./server
-    - docker build -t jc-prz/multi-worker ./worker
+    - docker build -t jcesarpabreu/multi-client ./client 
+    - docker build -t jcesarpabreu/multi-nginx ./nginx
+    - docker build -t jcesarpabreu/multi-server ./server
+    - docker build -t jcesarpabreu/multi-worker ./worker
     #login to Docker Hub
     - echo "$DOCKER_PASSWORD"| docker login -u "$DOCKER_ID" --password-stdin
     #Take those images and push them in Docker Hub
-    - docker push jc-prz/multi-client 
-    - docker push jc-prz/multi-nginx
-    - docker push jc-prz/multi-server 
-    - docker push jc-prz/multi-worker
+    - docker push jcesarpabreu/multi-client 
+    - docker push jcesarpabreu/multi-nginx
+    - docker push jcesarpabreu/multi-server 
+    - docker push jcesarpabreu/multi-worker
