@@ -1,6 +1,6 @@
-docker build -t jcesarpabreu/multi-client:latest -t jcesarpabreu/multi-client:$SHA ./client/Dockerfile ./client
-docker build -t jcesarpabreu/multi-worker:latest -t jcesarpabreu/multi-worker:$SHA ./worker/Dockerfile ./worker
-docker build -t jcesarpabreu/multi-server:latest -t jcesarpabreu/multi-server:$SHA ./server/Dockerfile ./server
+docker build -t jcesarpabreu/multi-client:latest -t jcesarpabreu/multi-client:$SHA -f ./client/Dockerfile ./client
+docker build -t jcesarpabreu/multi-worker:latest -t jcesarpabreu/multi-worker:$SHA -f ./worker/Dockerfile ./worker
+docker build -t jcesarpabreu/multi-server:latest -t jcesarpabreu/multi-server:$SHA -f ./server/Dockerfile ./server
 
 docker push jcesarpabreu/multi-client:latest
 docker push jcesarpabreu/multi-worker:latest
